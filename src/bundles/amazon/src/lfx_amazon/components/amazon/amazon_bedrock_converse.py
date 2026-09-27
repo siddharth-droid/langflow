@@ -48,7 +48,9 @@ class AmazonBedrockConverseComponent(LCModelComponent):
             display_name="Model ID",
             options=AWS_MODEL_IDs,
             value="anthropic.claude-3-5-sonnet-20241022-v2:0",
-            info="List of available model IDs to choose from.",
+            info="Choose a model ID from the list, or type any Bedrock model or inference profile ID "
+            "(e.g. 'us.anthropic.claude-sonnet-4-20250514-v1:0').",
+            combobox=True,
         ),
         SecretStrInput(
             name="aws_access_key_id",

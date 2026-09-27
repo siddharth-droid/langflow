@@ -101,3 +101,16 @@ def test_additional_model_fields_still_reach_unsupported_providers():
     ).build_model()
 
     assert model.additional_model_request_fields == {"max_gen_len": 512}
+
+
+def test_model_id_accepts_custom_values():
+    # Inference profile ids (e.g. "us.openai.gpt-6-sol") are not in the static option
+    # list; without combobox the frontend resets any typed value back to an option.
+    model_id_input = next(i for i in AmazonBedrockConverseComponent.inputs if i.name == "model_id")
+    assert model_id_input.combobox is True
+
+
+def test_custom_model_id_reaches_the_model():
+    custom_id = "us.openai.gpt-6-sol"
+    model = _component(model_id=custom_id).build_model()
+    assert model.model_id == custom_id
